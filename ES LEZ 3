@@ -1,0 +1,232 @@
+-----------------------------------------------
+-- Progetto	   : sommatore 4 bit
+-- Nome file   : top_tb.vhdl
+-- Descrizione : sommatore Ripple Carry a 4 ingressi
+-- Autore      : Guido Matrella
+-- Revisione   : 1.0
+-- Note        : TOP è la nostra UUT (Unit Under Test)
+-----------------------------------------------
+
+-- FASE 1
+-- Partendo dai disegni relativi ad HA si descriva il componente HA
+-- ATTENZIONE: per i nomi delle porte usate quelli che trovate nelle entity
+-- e non quelli che trovate sul disegno
+
+-- dichiarazione delle librerie
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+-- dichiarazione dell'entità e delle porte
+entity HA is
+  port(
+       HA_A : in STD_LOGIC; -- ingresso 1 
+       HA_B : in STD_LOGIC; -- ingresso 2
+	   HA_S : out STD_LOGIC; -- somma
+       HA_Co: out STD_LOGIC -- riporto Carry Out
+  );
+end HA;
+
+-- dichiarazione dell'architettura
+architecture behaviour of HA is 
+-- tabella di verità del HA
+-- A   B  | S   Co
+------------------
+-- 0   0  | 0   0
+-- 0   1  | 1   0
+-- 1   0  | 1   0
+-- 1   1  | 0   1
+-- ne segue evidentemente che:
+-- S è A xor B, mentre Co è A and B
+
+  begin
+	-- qui dovete descrivere in VHDL il circuito di HA
+	HA_S <= HA_A xor HA_B;
+	HA_Co <= HA_B and HA_A;
+  
+  end behaviour;
+ 
+ 
+-- FASE 2
+-- Partendo dai disegni relativi a FA si descriva il componente FA
+-- ATTENZIONE: per i nomi delle porte usate quelli che trovate nelle entity
+-- e non quelli che trovate sul disegno
+
+-- dichiarazione delle librerie
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+-- dichiarazione dell'entità e delle porte
+entity FA is 
+  port(
+       FA_A : in STD_LOGIC; -- ingresso 1 
+       FA_B : in STD_LOGIC; -- ingresso 2
+	   FA_Ci: in STD_LOGIC; -- ingresso 3 Carry In
+	   FA_S : out STD_LOGIC; -- somma
+       FA_Co: out STD_LOGIC -- riporto Carry Out
+  );
+end FA;
+
+-- dichiarazione dell'architettura
+architecture behaviour of FA is 
+component HA is -- dichiaro HA come componente di FA
+	port(
+	   HA_A : in STD_LOGIC; -- ingresso 1 
+       HA_B : in STD_LOGIC; -- ingresso 2
+	   HA_S : out STD_LOGIC; -- somma
+       HA_Co: out STD_LOGIC -- riporto Carry Out
+	   );
+ end component;
+
+-- dichiarazione dei segnali per collegare i diversi componenti
+  signal x,y,z: STD_LOGIC; 
+
+  begin
+	-- qui dovete descrivere in VHDL il vostro FA
+	-- esempio di istanza di un COMPONENTE
+	-- componente1: COMPONENT_NAME port map (porta1 => segnale1, porta2 => segnale2, ...);
+halfadder1: HA port map (HA_A => FA_A, HA_B => FA_B, HA_S => x, HA_Co => y);--ha1
+halfadder2: HA port map (HA_A => x, HA_B => FA_Ci, HA_S => FA_S, HA_Co => z);--ha2
+FA_Co <= y or z;
+  
+  end behaviour;
+
+  
+  
+-- FASE 3
+-- Partendo dai disegni relativi a SOMMATORE si descriva il componente SUM4
+-- ATTENZIONE: per i nomi delle porte usate quelli che trovate nelle entity
+-- e non quelli che trovate sul disegno
+
+--dichiarazione delle librerie
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+-- dichiarazione dell'entità e delle porte
+entity SUM4 is
+  port(
+       SUM4_A : in STD_LOGIC_VECTOR(3 downto 0); -- ingresso 1 
+       SUM4_B : in STD_LOGIC_VECTOR(3 downto 0); -- ingresso 2
+	   SUM4_Ci: in STD_LOGIC; -- ingresso 3 Carry In
+	   SUM4_S : out STD_LOGIC_VECTOR(3 downto 0); -- somma
+       SUM4_Co: out STD_LOGIC -- riporto Carry Out
+  );
+end SUM4;
+
+-- dichiarazione dell'architettura
+architecture behaviour of SUM4 is 
+component FA is -- dichiaro HA come componente di FA
+  port(
+       FA_A : in STD_LOGIC; -- ingresso 1 
+       FA_B : in STD_LOGIC; -- ingresso 2
+	   FA_Ci: in STD_LOGIC; -- ingresso 3 Carry In
+	   FA_S : out STD_LOGIC; -- somma
+       FA_Co: out STD_LOGIC -- riporto Carry Out
+      );
+end component;
+
+-- dichiarazione dei segnali per collegare i diversi componenti
+  signal C: STD_LOGIC_VECTOR(4 downto 0); -- definizione dei segnali per i riporti
+
+  begin
+	-- qui dovete descrivere in VHDL il vostro progetto
+	-- esempio di istanza di un COMPONENTE
+	-- componente1: COMPONENT_NAME port map (porta1 => segnale1, porta2 => segnale2, ...);
+  comp4: FA port map ( FA_A => SUM4_A(0), FA_B => SUM4_B(0), FA_Ci => SUM4_Ci, FA_S => SUM4_S(0), FA_Co => C(0) ); 
+  comp5: FA port map ( FA_A => SUM4_A(1), FA_B => SUM4_B(1), FA_Ci => C(0), FA_S => SUM4_S(1), FA_Co => C(1) ); 
+  comp6: FA port map ( FA_A => SUM4_A(2), FA_B => SUM4_B(2), FA_Ci => C(1), FA_S => SUM4_S(2), FA_Co => C(2) ); 
+  comp7: FA port map ( FA_A => SUM4_A(3), FA_B => SUM4_B(3), FA_Ci => C(2), FA_S => SUM4_S(3), FA_Co => SUM4_Co ); 
+    -- il primo riporto è quello che entra da Ci
+    -- l'ultimo riporto è quello che esce da Co
+ 
+  
+  end behaviour;
+
+  
+-- FASE 4
+------------------------------------------
+------------------------------------------
+------- SIMULAZIONE del SOMMATORE --------
+------------------------------------------
+------------------------------------------
+  
+-- dichiarazione per le librerie
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+-- dichiarazione dell'entità e delle porte
+-- questa entity non ha né porte di ingresso, né porte di uscita
+-- serve solo per il test
+entity TOP_Tb is 
+end TOP_Tb;
+
+-- dichiarazione dell'architettura
+architecture behaviour of TOP_Tb is
+
+-- dichiarazione della Unit Undet Test, ovvero il sommatore a 4 bit
+component SUM4 is 
+    port(
+          SUM4_A : in STD_LOGIC_VECTOR(3 downto 0); -- ingresso 1 
+          SUM4_B : in STD_LOGIC_VECTOR(3 downto 0); -- ingresso 2
+	      SUM4_Ci: in STD_LOGIC; -- ingresso 3 Carry In
+	      SUM4_S : out STD_LOGIC_VECTOR(3 downto 0); -- somma
+          SUM4_Co: out STD_LOGIC -- riporto Carry Out
+        );
+end component;
+	
+	-- dichiarazione dei segnali collegati alla UUT
+	signal  SUM4_A, SUM4_B, SUM4_S: STD_LOGIC_VECTOR(3 downto 0); 
+	signal  SUM4_Ci, SUM4_Co: STD_LOGIC;
+	signal  ideal_co: STD_LOGIC; -- riporto ideale
+	signal  ideal_s: STD_LOGIC_VECTOR(3 downto 0); -- somma ideale
+	signal  ERRORE_S,ERRORE_Co: STD_LOGIC := '0'; -- il segnale a cui associo l'errore
+begin
+
+----  Component instantiations  ----
+
+  UUT: SUM4 port map (SUM4_A=>SUM4_A,SUM4_B=>SUM4_B,SUM4_Ci=>SUM4_Ci,SUM4_S=>SUM4_S,SUM4_Co=>SUM4_Co);
+ 
+-- generazione degli stimoli d'ingresso per realizzare il test 
+-- e generazione delle uscite ideali per verificare la presenza di ERRORI
+  process
+  begin
+  SUM4_A<="0010"; SUM4_B<="0000"; SUM4_Ci<='1'; -- stimoli d'ingresso
+  ideal_s<="0011"; ideal_co<='0'; -- uscite ideali
+  wait for 10 ns;
+
+  SUM4_A<="0100"; SUM4_B<="0100"; SUM4_Ci<='0';
+  ideal_s<="1000"; ideal_co<='0';
+  wait for 10 ns;
+
+  SUM4_A<="1111"; SUM4_B<="0001"; SUM4_Ci<='0';
+  ideal_s<="0000"; ideal_co<='1';
+  wait for 10 ns;
+
+  SUM4_A<="0000"; SUM4_B<="0000"; SUM4_Ci<='0';
+  ideal_s<="0000"; ideal_co<='0';
+  wait for 10 ns;
+  
+  SUM4_A<="1010"; SUM4_B<="1010"; SUM4_Ci<='0';
+  ideal_s<="0100"; ideal_co<='1';
+  wait for 10 ns;
+  
+  SUM4_A<="0001"; SUM4_B<="1000"; SUM4_Ci<='1';
+  ideal_s<="1010"; ideal_co<='0';
+  wait for 10 ns;
+    
+  wait;  
+  
+  end process;
+
+-- Confrontiamo il nostro progetto con un Benchmark ideale
+-- creando due segnali di ERRORE
+  ERRORE_S <= '0' when (ideal_s = SUM4_S) else '1' after 1 ns;  
+  assert (ERRORE_S='0')
+  report "attenzione! controlla la somma con GTKWAVE"
+  severity WARNING;
+  
+  ERRORE_Co <= '0' when (ideal_co = SUM4_Co) else '1' after 1 ns;  
+  assert (ERRORE_Co='0')
+  report "attenzione! controlla il riporto con GTKWAVE"
+  severity WARNING;
+
+end behaviour;
