@@ -3,9 +3,9 @@ from random import *
 from actor import *
 
 class Jumper(Actor):
-    W, H = 15, 15
+    W, H = 20, 15
     SPEED = 4
-    GRAVITY = 0.4
+    GRAVITY = 0.5
     MAX_SPEED = 8
 
     def __init__(self, arena, x, y, synX, synY):
@@ -227,19 +227,19 @@ arena = Arena(300, 240)
 
 mario = Mario(arena, 10, 10, 210, 0)
 goomba = Goomba(arena, 150, 214, 0, 380)
-
+#---------------------------------------------
 walls = []
 wall = Wall(arena, 150, 160, 20, 20, 5, 640)
 walls.append(wall)
 tubo = Wall(arena, 240, 197, 35, 70, 309, 1167)
 walls.append(tubo)
-terrain = Wall(arena, 0, 230, 120, 10, 4, 889)
-walls.append(terrain)
-terrain1 = Wall(arena, 120, 230, 120, 10, 4, 899)
+terrain1 = Wall(arena, 0, 230, 120, 10, 4, 889)
 walls.append(terrain1)
-terrain2 = Wall(arena, 240, 230, 120, 10, 4, 899)
+terrain2 = Wall(arena, 120, 230, 120, 10, 4, 889)
 walls.append(terrain2)
-
+terrain3 = Wall(arena, 240, 230, 120, 10, 4, 889)
+walls.append(terrain3)
+#----------------------------------------------
 canvas = canvas_init((arena.size()))
 sprites = image_load("smb_sprites.png")
 
