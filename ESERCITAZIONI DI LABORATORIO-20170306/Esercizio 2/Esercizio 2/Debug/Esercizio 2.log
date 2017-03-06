@@ -1,0 +1,10 @@
+﻿Compilazione avviata 06/03/2017 12:09:27.
+     1>Progetto "Z:\Esercizio 2\Esercizio 2\Esercizio 2.vcxproj" sul nodo 2 (destinazioni: Build).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\Esercizio 2\Debug\Esercizio 2.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:\Esercizio 2\Debug\Esercizio 2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\Esercizio 2\Debug\Esercizio 2.lib" /MACHINE:X86 "Debug\Esercizio 2.obj"
+         Esercizio 2.vcxproj -> Z:\Esercizio 2\Debug\Esercizio 2.exe
+     1>Compilazione progetto "Z:\Esercizio 2\Esercizio 2\Esercizio 2.vcxproj" (destinazioni: Build) completata.
+
+Compilazione completata.
+
+Tempo trascorso 00:00:00.93
