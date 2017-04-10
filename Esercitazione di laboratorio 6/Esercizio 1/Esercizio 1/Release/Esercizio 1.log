@@ -1,0 +1,16 @@
+﻿Compilazione avviata 10/04/2017 11:53:16.
+     1>Progetto "E:\UNIPR\ESERCITAZIONI DI LABORATORIO-20170410\Esercitazione di laboratorio 6\Esercizio 1\Esercizio 1\Esercizio 1.vcxproj" sul nodo 2 (destinazioni: Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt "Esercizio 1.cpp"
+         Esercizio 1.cpp
+     1>Esercizio 1.cpp(34): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\UNIPR\ESERCITAZIONI DI LABORATORIO-20170410\Esercitazione di laboratorio 6\Esercizio 1\Release\Esercizio 1.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\UNIPR\ESERCITAZIONI DI LABORATORIO-20170410\Esercitazione di laboratorio 6\Esercizio 1\Release\Esercizio 1.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\UNIPR\ESERCITAZIONI DI LABORATORIO-20170410\Esercitazione di laboratorio 6\Esercizio 1\Release\Esercizio 1.lib" /MACHINE:X86 /SAFESEH "Release\Esercizio 1.obj"
+         Generazione codice in corso...
+         Generazione codice terminata
+         Esercizio 1.vcxproj -> E:\UNIPR\ESERCITAZIONI DI LABORATORIO-20170410\Esercitazione di laboratorio 6\Esercizio 1\Release\Esercizio 1.exe
+     1>Compilazione progetto "E:\UNIPR\ESERCITAZIONI DI LABORATORIO-20170410\Esercitazione di laboratorio 6\Esercizio 1\Esercizio 1\Esercizio 1.vcxproj" (destinazioni: Build) completata.
+
+Compilazione completata.
+
+Tempo trascorso 00:00:07.24

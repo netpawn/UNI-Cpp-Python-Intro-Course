@@ -1,0 +1,21 @@
+< 
+Conti Massimo;0 0 0.82
+ 
+Bianchi Simone;0 10 10.74
+ 
+Coppola Simone;0 11 11
+ 
+Marino Mario;0 12 12.31
+ 
+Basettoni Franco;0 12 12.41
+ 
+Colombo Isabella;0 14 14.44
+ 
+Colombo Pietro;0 14 14.8
+ 
+Conti Fabio;0 16 16.47
+ 
+Spalloni Maria;0 17 17.47
+ 
+De Luca Luca;0 18 18.22
+ >
